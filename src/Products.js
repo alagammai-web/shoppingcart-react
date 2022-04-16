@@ -12,18 +12,12 @@ const Products = () => {
   const [q, setQ] = useState("");
 
   useEffect(() => {
-    if (cartitem) {
-      const getlocalItem = JSON.parse(localStorage.getItem("item"));
-
-      setCartitem(getlocalItem);
-
-      // const set1 = [...new Set(getlocalItem)];
-      // console.log("set1", set1);
-    }
+    const getlocalItem = JSON.parse(localStorage.getItem("item"));
+    setCartitem(getlocalItem);
   }, []);
 
   useEffect(() => {
-    if (cartitem) {
+    if (cartitem.length >= 0) {
       localStorage.setItem("item", JSON.stringify(cartitem));
     }
   }, [cartitem]);
@@ -31,6 +25,13 @@ const Products = () => {
   useEffect(() => {
     setProdapi(prodapi);
   }, []);
+
+  const addtocart = (item) => {
+    // if (cartitem?.length === 0) {
+    setCartitem([...cartitem, item]);
+    // }
+  };
+
   // const addtocart = (id) => {
   //   const resp = prodapi.find((elem) => elem.id === id);
   //   const citem = cartitem.push(resp);
@@ -73,11 +74,6 @@ const Products = () => {
   //   );
   // };
 
-  const addtocart = (item) => {
-    cartitem.push(item);
-    console.log(cartitem);
-    setCartitem([...cartitem, item]);
-  };
   const Showproducts = () => {
     return (
       <div className="row">
@@ -94,7 +90,7 @@ const Products = () => {
                         className="price"
                         style={{ color: "red", fontWeight: 600 }}
                       >
-                        ${elem.price}
+                        ₹{elem.price}
                       </span>
                       <button
                         className="btn btn-primary mb-4"

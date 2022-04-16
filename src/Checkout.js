@@ -84,7 +84,7 @@ const Checkout = ({ cartitem, setCartitem, moreProducts }) => {
       </div>
       <div className="col-sm-12">
         <div className="row">
-          {cartitem ? (
+          {cartitem.length >= 0 ? (
             cartitem.map((elem) => {
               return (
                 <div className="col-md-12 card1" key={elem.id}>
@@ -94,29 +94,10 @@ const Checkout = ({ cartitem, setCartitem, moreProducts }) => {
                     className="price"
                     style={{ color: "red", fontWeight: 600 }}
                   >
-                    {/* {qty >= 1 ? `${elem.price * qty}` : `${elem.price}`} */}
-                    {/* {elem.price} */}
-                    {/* <br /> */}
-                    {elem.price * elem.quantity}
+                    ₹{elem.price * elem.quantity}
                   </span>
                   <div className="qty">
-                    {/* <input
-                      type="text"
-                      value={qty}
-                      onChange={(e) => changeQty(e.target.value)}
-                      style={{
-                        background: "teal",
-                        color: "#fff",
-                        width: "100px",
-                        height: "40px",
-                        textAlign: "center",
-                        lineHeight: "40px",
-                        display: "inline-block",
-                        margin: "10px 20px",
-                      }}
-                    /> */}
-
-                    <button onClick={() => handleChange(elem, 1)}>+</button>
+                    <button onClick={() => handleChange(elem, -1)}>-</button>
                     <b
                       style={{
                         background: "gray",
@@ -131,7 +112,7 @@ const Checkout = ({ cartitem, setCartitem, moreProducts }) => {
                     >
                       {elem.quantity}
                     </b>
-                    <button onClick={() => handleChange(elem, -1)}>-</button>
+                    <button onClick={() => handleChange(elem, 1)}>+</button>
 
                     <NotificationContainer />
                   </div>
@@ -149,7 +130,15 @@ const Checkout = ({ cartitem, setCartitem, moreProducts }) => {
               <div className="col-sm-12 text-center">
                 <b>No products found</b>
               </div>
-              <Link to="/products">Go back to products</Link>
+              <Link to="/products" onClick={() => moreProducts()}>
+                Go back to products
+              </Link>
+            </div>
+          )}
+
+          {cartitem.length === 0 && (
+            <div className="text-center col-sm-12">
+              <h1 className="text-center col-sm-12">cart is empty</h1>
             </div>
           )}
         </div>
