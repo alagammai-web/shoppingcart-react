@@ -31,19 +31,21 @@ const Products = () => {
   useEffect(() => {
     setProdapi(prodapi);
   }, []);
-  const addtocart = (id) => {
-    const resp = prodapi.find((elem) => elem.id === id);
-    const citem = [...cartitem, resp];
-    console.log("citem is", citem);
+  // const addtocart = (id) => {
+  //   const resp = prodapi.find((elem) => elem.id === id);
+  //   const citem = cartitem.push(resp);
+  //   // const citem = [...cartitem, resp];
+  //   console.log("citem is", citem);
 
-    // removing duplicate items in array by using filter
-    const uniqueNames = citem.filter((itemm, index) => {
-      return citem.indexOf(itemm) === index;
-    });
+  //   // removing duplicate items in array by using filter
 
-    setCartitem(uniqueNames);
-    console.log("uniqueNames", uniqueNames);
-  };
+  //   // const uniqueNames = citem.filter((itemm, index) => {
+  //   //   return citem.indexOf(itemm) === index;
+  //   // });
+
+  //   // setCartitem(uniqueNames);
+  //   // console.log("uniqueNames", uniqueNames);
+  // };
   const routeChange = () => {
     setShowcart(true);
   };
@@ -70,6 +72,12 @@ const Products = () => {
   //     </div>
   //   );
   // };
+
+  const addtocart = (item) => {
+    cartitem.push(item);
+    console.log(cartitem);
+    setCartitem([...cartitem, item]);
+  };
   const Showproducts = () => {
     return (
       <div className="row">
@@ -90,7 +98,7 @@ const Products = () => {
                       </span>
                       <button
                         className="btn btn-primary mb-4"
-                        onClick={() => addtocart(elem.id)}
+                        onClick={() => addtocart(elem)}
                       >
                         Add to cart
                       </button>
