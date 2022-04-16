@@ -16,7 +16,7 @@ function App() {
         <Nabvbar />
         <Routes>
           <Route path="/" element={<Products />} />
-          <Route path="/ecommerce-react" element={<Products />} />
+          <Route path="/shoppingcart-react" element={<Products />} />
           {/* <Route path="/home" element={<Home />} /> */}
           <Route path="/products" element={<Products />} />
           <Route path="/about" element={<About />} />
